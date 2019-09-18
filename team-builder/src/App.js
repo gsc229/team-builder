@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Create from "./components/Create";
+
+import "./App.css";
 
 function App() {
+  const [members, setMembers] = useState([
+    {
+      memberName: "Bugs Bunny",
+      email: "bugs@hole.com",
+
+      role: "Full Stack Developer"
+    }
+  ]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Add Team Member</h1>
+      <Create members={members} setMembers={setMembers} />
+      {members.map((member, index) => (
+        <div className="note" key={index}>
+          <h2>{member.memberName}</h2>
+          <p>{member.email}</p>
+          <p>{member.role}</p>
+        </div>
+      ))}
     </div>
   );
 }
