@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../App.css";
 
-function Create(props) {
+function Form(props) {
   /*  const [title, setTitle] = useState();
   const handleTextChange = event => {
     setTitle(event.target.value);
@@ -20,12 +20,14 @@ function Create(props) {
   }; */
 
   const [newMember, setNewMember] = useState({
+    id: props.members.length,
     memberName: "",
     email: "",
     role: ""
   });
 
   const handleChange = event => {
+    /* console.log(event.target); */
     setNewMember({
       ...newMember,
       [event.target.name]: event.target.value
@@ -36,11 +38,15 @@ function Create(props) {
     event.preventDefault();
     props.setMembers([...props.members, newMember]);
     resetForm(event);
+    console.log("newMember", newMember);
   };
-  console.log(newMember);
+  console.log("props.members from Form.js", props.members);
+
+  /* ==== RESET THE FORM ======= */
   const resetForm = event => {
     event.preventDefault();
     setNewMember({
+      id: newMember.id + 1,
       memberName: "",
       email: "",
       role: ""
@@ -64,7 +70,7 @@ function Create(props) {
           onChange={handleChange}
           type="text"
           name="email"
-          id=""
+          id="id"
           placeholder="Your Email"
           value={newMember.email}
         />
@@ -86,4 +92,4 @@ function Create(props) {
   );
 }
 
-export default Create;
+export default Form;
